@@ -1,8 +1,9 @@
 import {Router} from "express"
-
 const router = Router();
 
+import { IndexWelcome } from '../controllers/index.controller';
+
 router.route("/")
-    .get((req, res) => res.json("Welcome to my API"))
+    .get(IndexWelcome)
 
 export default router;
