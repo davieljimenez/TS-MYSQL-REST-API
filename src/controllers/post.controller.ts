@@ -27,3 +27,13 @@ export async function getOnePost(req: Request, res:Response):Promise<Response>{
     const posts = await conn.query("SELECT * FROM posts WHERE id = ?",[id]);
     return res.json(posts[0])
 }
+
+// ELiminar:
+export async function deletePost(req: Request, res:Response):Promise<Response>{
+    const id = req.params.postId;
+    const conn = await connect();
+    const deletePost = await conn.query("DELETE FROM posts WHERE id = ?",[id])
+    return res.json({
+        message: `Post id: ${id} deleted`
+    })
+}
