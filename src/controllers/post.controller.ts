@@ -32,8 +32,20 @@ export async function getOnePost(req: Request, res:Response):Promise<Response>{
 export async function deletePost(req: Request, res:Response):Promise<Response>{
     const id = req.params.postId;
     const conn = await connect();
-    const deletePost = await conn.query("DELETE FROM posts WHERE id = ?",[id])
+    await conn.query("DELETE FROM posts WHERE id = ?",[id])
     return res.json({
         message: `Post id: ${id} deleted`
+    })
+}
+
+// Actualizar
+
+export async function updatePost(req: Request, res:Response):Promise<Response> {
+    const id = req.params.postId;
+    const updatePost:Post = req.body;
+    const conn = await connect();
+    await conn.query("UPDATE posts set ? WHERE id = ?", [updatePost, id])
+    return res.json({
+        message: "Post updated"
     })
 }
